@@ -10,19 +10,20 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Core Sql REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Core Sql REQUIRED)
 
-find_package(PkgConfig)
-pkg_search_module(SQLITE3 REQUIRED sqlite3)
-include_directories(${SQLITE3_INCLUDE_DIRS})
+#find_package(PkgConfig)
 
 add_executable(EasyHost
         main.cpp
         widget.cpp
         widget.h
         widget.ui)
-target_link_libraries(EasyHost PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(EasyHost PRIVATE
+        Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::Core)
 
 add_executable(core core.cpp)
-target_link_libraries(core ${SQLITE3_LIBRARIES})
+target_link_libraries(core PRIVATE
+        Qt${QT_VERSION_MAJOR}::Sql)

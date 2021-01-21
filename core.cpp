@@ -2,20 +2,37 @@
 // Created by mason on 2021/1/18.
 //
 
-#include <sqlite3.h>
-
+#include <QDebug>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-  sqlite3* db;
-  int rc;
+  QString connectName = "hosts_sqlite";
 
-  rc = sqlite3_open("hosts.db", &db);
-  if (rc) {
-    fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+  QSqlDatabase database;
+
+  if (QSqlDatabase::contains(connectName)) {
+    database = QSqlDatabase::database(connectName);
   } else {
-    fprintf(stderr, "Opened database successfully\n");
+    database = QSqlDatabase::addDatabase("QSQLITE", connectName);
+    database.setDatabaseName("hosts.db");
   }
-  sqlite3_close(db);
+
+  qDebug() << "warn";
+
+  auto createTableSql = R"~(create table hosts
+(
+    id       INTEGER not null primary key autoincrement,
+    group_id INTEGER not null default 0,
+    name     text    not null default '',
+    domain   text    not null default '',
+    ip       text    not null default '',
+    flag     integer not null default 0,
+    prop     INTEGER not null default 0
+);)~";
+
+  std::cout << createTableSql << std::endl;
   return EXIT_SUCCESS;
 }
