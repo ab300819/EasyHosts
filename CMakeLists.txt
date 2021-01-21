@@ -16,14 +16,14 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Core Sql REQUIRED)
 #find_package(PkgConfig)
 
 add_executable(EasyHost
-        main.cpp
-        widget.cpp
-        widget.h
-        widget.ui)
+        src/main.cpp
+        src/widget.cpp
+        src/widget.h
+        src/widget.ui)
 target_link_libraries(EasyHost PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Core)
 
-add_executable(core core.cpp)
+add_executable(core src/core.cpp)
 target_link_libraries(core PRIVATE
         Qt${QT_VERSION_MAJOR}::Sql)
