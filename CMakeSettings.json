@@ -1,0 +1,16 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug (default)",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "-DCMAKE_PREFIX_PATH=\"C:\\Users\\mengshen\\Documents\\source\\qt\\5.15.2\\msvc2015_64\\lib\\cmake\\Qt5;C:\\Users\\mengshen\\Documents\\source\\qt\\5.15.2\\msvc2015_64\\lib\\cmake\\Qt5Sql\"",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": []
+    }
+  ]
+}
